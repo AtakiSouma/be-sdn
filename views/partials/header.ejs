@@ -1,0 +1,94 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <style>
+      .error {
+        color: #ff0000;
+        margin: 10px 2px;
+        font-size: 0.8em;
+        font-weight: bold;
+      }
+      .navbar {
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-right: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+      }
+      .form-container {
+        margin-top: 20px;
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        align-items: center;
+      }
+      form {
+        width: 500px;
+        border: 1px solid gray;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .welcome {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+      }
+      .table-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 30px;
+
+      }
+      .table-class{
+        margin-top:30px;
+          border:0.5px solid gray ;
+          width: 1200px;
+          border-radius: 20px;
+      }
+      table {
+        width: 100%;
+      }
+
+
+      
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="header-left">Home</div>
+      <div class="header-right">
+        <% if (user) { %>
+        <div class="welcome">
+          <div>Welcome, <%= user.username %></div>
+          <a href="/users/logout">
+            <button type="button" class="btn btn-warning">Logout</button>
+          </a>
+        </div>
+
+        <% } else { %>
+        <a href="/users/login">
+          <button type="button" class="btn btn-primary">Login</button>
+        </a>
+        <a href="/users/signup">
+          <button type="button" class="btn btn-secondary">Sign up</button>
+        </a>
+        <% } %>
+      </div>
+    </nav>
+  </body>
+</html>

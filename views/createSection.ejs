@@ -1,0 +1,113 @@
+<%- include('partials/header'); -%>
+<div class="form-container">
+  <form>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Section Name</label>
+      <input
+        name="sectionName"
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+      <div class="sectionName error"></div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label"
+        >Section Description</label
+      >
+      <input
+        type="text"
+        name="sectionDescription"
+        class="form-control"
+        id="exampleInputPassword1"
+      />
+      <div class="sectionDescription error"></div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Duration</label>
+      <input
+        name="duration"
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+      <div class="duration error"></div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputSelect" class="form-label">Duration</label>
+      <select class="form-control" id="exampleInputSelect" name="course">
+        <% course.forEach((data,index) => { %>
+        <option value="<%= data._id%>"><%= data.courseName%></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-check" style="margin-bottom: 10px">
+      <input
+        type="checkbox"
+        name="isMainTask"
+        class="form-check-input"
+        id="exampleCheck1"
+        value="true"
+      />
+      <label class="form-check-label" for="exampleCheck1">Is Main Task?</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/section/dashboard">
+      <button class="btn btn-secondary">Cancel</button>
+    </a>
+  </form>
+</div>
+<script>
+  const form = document.querySelector("form");
+  const sectionNameError = document.querySelector(".sectionName.error");
+  const sectionDescriptionError = document.querySelector(
+    ".sectionDescription.error"
+  );
+  const durationError = document.querySelector(".duration.error");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // reset errors
+    sectionNameError.textContent = "";
+    sectionDescriptionError.textContent = "";
+    durationError.textContent = "";
+
+    // get values
+    const sectionName = form.sectionName.value;
+    const sectionDescription = form.sectionDescription.value;
+    const duration = form.duration.value;
+    const isMainTask = form.isMainTask.checked;
+    const course = form.course.value;
+
+    try {
+      const res = await fetch("/section/create", {
+        method: "POST",
+        body: JSON.stringify({
+          sectionName,
+          sectionDescription,
+          duration,
+          isMainTask,
+          course,
+        }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.errors) {
+        sectionNameError.textContent = data.errors.sectionName;
+        sectionDescriptionError.textContent = data.errors.sectionDescription;
+        durationError.textContent = data.errors.duration;
+      }
+      if (data.newSections) {
+        location.assign("/section/dashboard");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  });
+</script>
+
+<%- include('partials/footer'); -%>
