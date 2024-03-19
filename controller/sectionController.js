@@ -52,11 +52,16 @@ class SectionController {
       existSection.sectionName = sectionName || existSection.sectionName;
       existSection.sectionDescription =
         sectionDescription || existSection.sectionDescription;
+
       existSection.duration = duration || existSection.duration;
-      existSection.isMainTask = isMainTask || existSection.isMainTask;
+
+      existSection.isMainTask =
+        typeof isMainTask !== "undefined"
+          ? isMainTask
+          : existSection.isMainTask;
+
       existSection.course = course || existSection.course;
       await existSection.save();
-
       const response = {
         status: 200,
         msg: "Course created Successfully",

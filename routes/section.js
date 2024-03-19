@@ -1,6 +1,7 @@
 const express = require("express");
 const sectionController = require("../controller/sectionController");
-const { requireAuth } = require("../middleware/authMiddleware");
+const { requireAuth, verifyToken } = require("../middleware/authMiddleware");
+const { verify } = require("jsonwebtoken");
 const router = express.Router();
 
 router.route("/create").get(requireAuth, sectionController.getCreateCoursePage);

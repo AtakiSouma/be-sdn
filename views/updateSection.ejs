@@ -53,10 +53,10 @@
       <input
         class="form-check-input"
         type="checkbox"
-        value="true"
         name="isMainTask"
         role="switch"
         id="flexSwitchCheckDefault"
+        <% if (section.isMainTask) { %>  checked <% } %> 
       />
       <label class="form-check-label" for="flexSwitchCheckDefault"
         >This is main Task?</label
@@ -86,8 +86,9 @@
     const sectionName = form.sectionName.value;
     const sectionDescription = form.sectionDescription.value;
     const duration = form.duration.value;
-    const isMainTask = form.isMainTask.value;
+    const isMainTask = form.isMainTask.checked;
     const course = form.course.value;
+    console.log("ismInaTask" ,form.isMainTask.checked)
     try {
       const res = await fetch(`/section/update/<%=section._id%>`, {
         method: "PUT",
