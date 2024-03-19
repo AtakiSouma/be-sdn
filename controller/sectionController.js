@@ -23,6 +23,9 @@ class SectionController {
       "course"
     );
     const course = await Courses.find({});
+    if (!section || !course) {
+      res.render("404");
+    }
     return res.render("updateSection", { section: section, course: course });
   }
   async getDashboard(req, res, next) {
