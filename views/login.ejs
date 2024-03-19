@@ -60,7 +60,7 @@
         passwordError.textContent = data.errors.password;
       }
       if (data.user) {
-        location.assign("/");
+        location.assign("/section/dashboard");
       }
     } catch (err) {
       console.log(err);

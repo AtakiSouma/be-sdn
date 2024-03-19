@@ -27,7 +27,7 @@
           <td><%= data.sectionDescription %></td>
           <td><%= data.duration %></td>
           <td><%= data.isMainTask %></td>
-          <td><%= data.course.courseName %></td>
+          <td class="<%= !data.course ? 'no-course' : '' %>"><%= data.course ? data.course.courseName : 'No Course' %></td>
           <td style="display: flex; gap: 10px">
             <a href="/section/update/<%= data._id %>">
               <button type="button" class="btn btn-info">Update</button>

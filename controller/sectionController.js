@@ -25,7 +25,6 @@ class SectionController {
     const course = await Courses.find({});
     return res.render("updateSection", { section: section, course: course });
   }
-  F;
   async getDashboard(req, res, next) {
     const allsection = await Sections.find({}).populate("course");
     return res.render("dashboard", { section: allsection });
@@ -47,20 +46,17 @@ class SectionController {
     const { id } = req.params;
     const { sectionName, sectionDescription, duration, isMainTask, course } =
       req.body;
+
     try {
-      const existSection = await Sections.findByIdAndUpdate(
-        { _id: id },
-        {
-          course: course,
-          duration: duration,
-          isMainTask: isMainTask,
-          sectionDescription: sectionDescription,
-          sectionName: sectionName,
-        },
-        {
-          new: true,
-        }
-      );
+      const existSection = await Sections.findById({ _id: id });
+      existSection.sectionName = sectionName || existSection.sectionName;
+      existSection.sectionDescription =
+        sectionDescription || existSection.sectionDescription;
+      existSection.duration = duration || existSection.duration;
+      existSection.isMainTask = isMainTask || existSection.isMainTask;
+      existSection.course = course || existSection.course;
+      await existSection.save();
+
       const response = {
         status: 200,
         msg: "Course created Successfully",

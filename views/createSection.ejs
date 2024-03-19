@@ -28,7 +28,7 @@
       <label for="exampleInputEmail1" class="form-label">Duration</label>
       <input
         name="duration"
-        type="text"
+        type="number"
         class="form-control"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
@@ -36,7 +36,7 @@
       <div class="duration error"></div>
     </div>
     <div class="mb-3">
-      <label for="exampleInputSelect" class="form-label">Duration</label>
+      <label for="exampleInputSelect" class="form-label">Course</label>
       <select class="form-control" id="exampleInputSelect" name="course">
         <% course.forEach((data,index) => { %>
         <option value="<%= data._id%>"><%= data.courseName%></option>
@@ -56,7 +56,7 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
     <a href="/section/dashboard">
-      <button class="btn btn-secondary">Cancel</button>
+      <button type="button" class="btn btn-secondary">Cancel</button>
     </a>
   </form>
 </div>
@@ -108,6 +108,7 @@
       console.log(err);
     }
   });
+ 
 </script>
 
 <%- include('partials/footer'); -%>

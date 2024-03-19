@@ -31,7 +31,7 @@
       <input
         name="duration"
         value="<%= section.duration%>"
-        type="text"
+        type="number"
         class="form-control"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
@@ -77,7 +77,6 @@
   const durationError = document.querySelector(".duration.error");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
     // reset errors
     sectionNameError.textContent = "";
     sectionDescriptionError.textContent = "";
